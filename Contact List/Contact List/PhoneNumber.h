@@ -10,6 +10,7 @@
 
 @interface PhoneNumber : NSObject
 
+// Properties
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *number;
 

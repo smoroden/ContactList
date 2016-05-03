@@ -15,6 +15,7 @@
     return self;
 }
 
+// Gets a string from the user and nicely converts it to a NSString
 -(NSString *)inputForPrompt:(NSString *)promptString {
     char inputChars[255];
     
@@ -23,6 +24,8 @@
     fgets(inputChars, 255, stdin);
     
     NSString *finalInput = [[NSString stringWithUTF8String:inputChars] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    // Only remove items if we are at the max that we want to store.
     if (self.history.count == 4) {
         [self.history removeObjectsAtIndexes:[NSIndexSet indexSetWithIndex:0]];
     }
@@ -31,6 +34,7 @@
     return finalInput;
 }
 
+// Prints the last 3 commands + the history command
 -(void)printHistory {
     NSLog(@"The last three commands entered + history: ");
     for (NSString *command in self.history) {

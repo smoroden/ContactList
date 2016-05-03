@@ -10,22 +10,24 @@
 
 @implementation ContactList
 
+// We need to initialize the list array
 -(instancetype)init {
     self.list = [@[] mutableCopy];
     
     return self;
 }
 
+//Adds a contact
 -(void)addContact:(Contact *)newContact {
-
-    [self.list addObject:newContact];
+    if (newContact != nil)
+        [self.list addObject:newContact];
 
 }
 
-
+// Prints the contacts with their ID number and names
 -(void)listContacts {
     if (self.list.count != 0) {
-        
+        // We use the classic for loop so we have an index handy
         for (int i = 0; i < self.list.count; i++) {
             Contact *contact = self.list[i];
             NSLog(@"%i %@ ()", i, contact.fullName);
@@ -33,12 +35,14 @@
     }
 }
 
+// Just prints the phone numbers for a contact
 -(void)listPhoneNumbers:(Contact *)contact {
     for (PhoneNumber *phoneNumber in contact.phoneNumbers) {
         NSLog(@"%@: %@", phoneNumber.type, phoneNumber.number);
     }
 }
 
+// Prints a single contact
 -(void)printContact:(Contact *)contact {
     NSLog(@"Full Name: %@",contact.fullName);
     NSLog(@"Email: %@", contact.email);
@@ -46,6 +50,7 @@
     NSLog(@"------------------------------");
 }
 
+// prints a contact for an id number if found.
 -(void)showContactWithId:(int)index {
     if(index >= self.list.count || index < 0) {
         NSLog(@"Contact not found.\n");
@@ -57,6 +62,7 @@
     }
 }
 
+// Returns if a contact exists
 -(BOOL)find:(NSString *)searchTerm {
     BOOL found = NO;
     if (searchTerm == nil) {
