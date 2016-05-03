@@ -10,6 +10,11 @@
 
 @implementation InputCollector
 
+-(instancetype)init {
+    self.history = [@[] mutableCopy];
+    return self;
+}
+
 -(NSString *)inputForPrompt:(NSString *)promptString {
     char inputChars[255];
     
@@ -17,7 +22,20 @@
     
     fgets(inputChars, 255, stdin);
     
-    return [[NSString stringWithUTF8String:inputChars] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *finalInput = [[NSString stringWithUTF8String:inputChars] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (self.history.count == 4) {
+        [self.history removeObjectsAtIndexes:[NSIndexSet indexSetWithIndex:0]];
+    }
+    [self.history addObject:finalInput];
+    
+    return finalInput;
+}
+
+-(void)printHistory {
+    NSLog(@"The last three commands entered + history: ");
+    for (NSString *command in self.history) {
+        NSLog(@"%@", command);
+    }
 }
 
 @end

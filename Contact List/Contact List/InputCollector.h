@@ -10,6 +10,10 @@
 
 @interface InputCollector : NSObject
 
+@property (nonatomic, strong) NSMutableArray *history;
+
+-(instancetype)init;
+-(void)printHistory;
 -(NSString *)inputForPrompt:(NSString *)promptString;
 
 @end

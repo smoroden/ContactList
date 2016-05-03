@@ -62,7 +62,9 @@ int main(int argc, const char * argv[]) {
                 [contactList showContactWithId:index];
             } else if ([command isEqualToString:@"find"]) {
                 [contactList find:data];
-            } else {
+            } else if ([command isEqualToString:@"history"]){
+                [inputCollector printHistory];
+            }else {
                 NSLog(@"Invalid command.");
             }
 
